@@ -63,13 +63,18 @@ def index():
                 if (len(email)) < 3 or (len(email) > 20):
                     email_err = "Email must be within 3-20 characters."
 
-        if email_at(email):
-            email_err = 'Too many @ symbols'
+        if not empty_input(email):
             email = ''
 
-        if email_period(email):
-            email_err = 'Too many . symbols'
-            email = ''
+        else:
+
+            if email_at(email):
+                email_err = 'Check your @ symbols'
+                email = ''
+
+            elif email_period(email):
+                email_err = 'Check your . symbols'
+                email = ''
 
 
 
@@ -99,11 +104,15 @@ def empty_input(x):
 def email_at(x):
     if x.count('@') > 1:
         return True
+    elif x.count('@') < 1:
+        return True
     else:
         return False
 
 def email_period(x):
     if x.count('.') > 1:
+        return True
+    elif x.count('.') < 1:
         return True
     else:
         return False
